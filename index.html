@@ -1,22 +1,32 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LLM Visibility & Citations Copilot — Investor Landing</title>
-  <meta name="description" content="Le copilote EU‑first qui révèle où et pourquoi les IA vous ignorent (Perplexity, Google AI Overviews…) et transforme les gaps en actions SEO/PR prêtes à exécuter." />
+  <meta id="meta-desc" name="description" content="Le copilote EU‑first qui révèle où et pourquoi les IA vous ignorent (Perplexity, Google AI Overviews…) et transforme les gaps en actions prêtes à exécuter." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
-    .bg-grid { background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; }
+    .glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(8px); }
+    .pill { border-radius: 9999px; padding: 4px 10px; font-size: 12px; font-weight: 600; }
+    .toggle-active { background: rgba(56,189,248,0.15); color:#e0f2fe; border-color: rgba(56,189,248,0.35); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius: 12px; padding: 10px 16px; font-weight: 600; }
+    .btn-primary { background:#0ea5e9; color:#fff; box-shadow: 0 10px 25px rgba(56,189,248,.3); }
+    .btn-ghost { color:#cbd5e1; border:1px solid rgba(255,255,255,.12); }
+    .badge-step { border-radius: 10px; padding: 8px 12px; font-size: 14px; }
+    .ok { background: rgba(16,185,129,.15); color:#bbf7d0; }
+    .wait { background: rgba(255,255,255,.06); color:#cbd5e1; }
+    .table th, .table td { padding: 8px 12px; }
   </style>
 </head>
 <body class="min-h-screen text-slate-100 bg-slate-950">
-  <!-- Decorative Background -->
+  <!-- Background -->
   <div aria-hidden class="pointer-events-none fixed inset-0 -z-10">
     <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950"></div>
     <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-sky-500/20 blur-3xl"></div>
@@ -28,18 +38,24 @@
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-sky-400 to-violet-500 flex items-center justify-center text-white font-black">LLM</div>
-        <span class="text-white/90 font-semibold">Visibility & Citations Copilot</span>
+        <span class="text-white/90 font-semibold" data-i18n="brand">Visibility & Citations Copilot</span>
       </div>
       <nav class="hidden md:flex items-center gap-6 text-slate-200">
-        <a href="#product" class="hover:text-white">Produit</a>
-        <a href="#why-now" class="hover:text-white">Why Now</a>
-        <a href="#moat" class="hover:text-white">Différenciation</a>
-        <a href="#traction" class="hover:text-white">Traction</a>
-        <a href="#model" class="hover:text-white">Business</a>
-        <a href="#contact" class="hover:text-white">Contact</a>
+        <a href="#product" class="hover:text-white" data-i18n="nav.product">Produit</a>
+        <a href="#demo" class="hover:text-white" data-i18n="nav.demo">Démo</a>
+        <a href="#roi" class="hover:text-white" data-i18n="nav.roi">ROI</a>
+        <a href="#why-now" class="hover:text-white" data-i18n="nav.whynow">Why Now</a>
+        <a href="#moat" class="hover:text-white" data-i18n="nav.moat">Différenciation</a>
+        <a href="#traction" class="hover:text-white" data-i18n="nav.traction">Traction</a>
+        <a href="#model" class="hover:text-white" data-i18n="nav.model">Business</a>
+        <a href="#contact" class="hover:text-white" data-i18n="nav.contact">Contact</a>
       </nav>
-      <div class="hidden md:block">
-        <a href="#contact" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-600/30">Parler aux fondateurs</a>
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 text-xs">
+          <button id="btn-fr" class="pill border border-white/10 hover:bg-white/5">FR</button>
+          <button id="btn-en" class="pill border border-white/10 hover:bg-white/5">EN</button>
+        </div>
+        <a href="#contact" class="btn btn-primary hidden md:inline-flex" data-i18n="cta.talk">Parler aux fondateurs</a>
       </div>
     </div>
   </header>
@@ -49,66 +65,43 @@
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
       <div>
         <div class="mb-4 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/30">EU‑first • Privacy by design</span>
-          <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30">FR / ES / DE par défaut</span>
+          <span class="pill bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/30" data-i18n="badges.eu">EU‑first • Privacy by design</span>
+          <span class="pill bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30" data-i18n="badges.langs">FR / ES / DE</span>
         </div>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">Gagnez votre <span class="bg-gradient-to-r from-sky-400 to-violet-400 bg-clip-text text-transparent">visibilité dans les réponses IA</span></h1>
-        <p class="mt-5 text-lg text-slate-300 max-w-xl">Nous révélons <span class="text-white font-semibold">où et pourquoi</span> les IA vous ignorent (Perplexity, Google AI Overviews…) et transformons ces « gaps » en <span class="text-white font-semibold">actions SEO/PR prêtes à exécuter</span>.</p>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white" data-i18n="hero.title">Gagnez votre visibilité dans les réponses IA</h1>
+        <p class="mt-5 text-lg text-slate-300 max-w-xl" data-i18n="hero.subtitle">Nous révélons où et pourquoi les IA vous ignorent (Perplexity, Google AI Overviews…) et transformons ces « gaps » en actions SEO/PR prêtes à exécuter.</p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#demo" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-600/30">Voir la démo</a>
-          <a href="#contact" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/5 ring-1 ring-white/10">Deck investisseurs</a>
+          <a href="#demo" class="btn btn-primary" data-i18n="cta.demo">Voir la démo</a>
+          <a href="#contact" class="btn btn-ghost" data-i18n="cta.deck">Deck investisseurs</a>
         </div>
         <div class="mt-8 flex items-center gap-6 text-slate-400 text-sm">
-          <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Multilingue (FR/ES/DE)</div>
-          <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> KPI clés : Coverage • Visibility • Citation Share</div>
+          <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> <span data-i18n="hero.point1">Multilingue (FR/ES/DE)</span></div>
+          <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> <span data-i18n="hero.point2">KPI : Coverage • Visibility • Citation Share</span></div>
         </div>
       </div>
-      <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-sm shadow-lg shadow-black/20 p-4">
+      <div class="rounded-2xl glass shadow-lg shadow-black/20 p-4">
         <div class="rounded-xl bg-slate-900/60 ring-1 ring-white/10 p-4">
-          <div class="text-slate-200 text-sm">Exemple — Cluster « Comparatifs Skincare » (FR)</div>
-          <div class="mt-3 grid grid-cols-12 gap-2 text-xs text-slate-300">
-            <!-- simple bars -->
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 44px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 56px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 68px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 32px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 80px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 44px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 56px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 68px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 32px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 80px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 44px"></div></div>
-            <div class="h-24 rounded-md bg-gradient-to-t from-sky-500/15 to-sky-500/5 ring-1 ring-white/5 flex items-end"><div class="w-full rounded-b-md bg-sky-400/60" style="height: 56px"></div></div>
-          </div>
+          <div class="text-slate-200 text-sm" data-i18n="hero.example">Exemple — Cluster « Comparatifs Skincare » (FR)</div>
+          <div id="bars" class="mt-3 grid grid-cols-12 gap-2 text-xs text-slate-300"></div>
           <div class="mt-4 grid sm:grid-cols-3 gap-3">
-            <div class="rounded-xl bg-white/5 p-3 ring-1 ring-white/10">
-              <div class="text-xs text-slate-400">Coverage</div>
-              <div class="text-2xl font-bold text-white">82%</div>
-            </div>
-            <div class="rounded-xl bg-white/5 p-3 ring-1 ring-white/10">
-              <div class="text-xs text-slate-400">Visibility Score</div>
-              <div class="text-2xl font-bold text-white">74</div>
-            </div>
-            <div class="rounded-xl bg-white/5 p-3 ring-1 ring-white/10">
-              <div class="text-xs text-slate-400">Citation Share</div>
-              <div class="text-2xl font-bold text-white">+12pts</div>
-            </div>
+            <div class="rounded-xl glass p-3"><div class="text-xs text-slate-400">Coverage</div><div class="text-2xl font-bold text-white">82%</div></div>
+            <div class="rounded-xl glass p-3"><div class="text-xs text-slate-400">Visibility</div><div class="text-2xl font-bold text-white">74</div></div>
+            <div class="rounded-xl glass p-3"><div class="text-xs text-slate-400">Citation Share</div><div class="text-2xl font-bold text-white">+12pts</div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOGOS -->
+  <!-- SOCIAL PROOF -->
   <section class="py-10">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center text-slate-400 text-sm">Fait pour agences SEO/Content & marques e‑commerce</div>
+      <div class="text-center text-slate-400 text-sm" data-i18n="social.subtitle">Fait pour agences SEO/Content & marques e‑commerce</div>
       <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 opacity-75">
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 flex items-center justify-center text-slate-200 font-semibold">Shopify</div>
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 flex items-center justify-center text-slate-200 font-semibold">WordPress</div>
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 flex items-center justify-center text-slate-200 font-semibold">Perplexity</div>
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 flex items-center justify-center text-slate-200 font-semibold">Google AIO</div>
+        <div class="rounded-2xl glass p-6 flex items-center justify-center text-slate-200 font-semibold">Shopify</div>
+        <div class="rounded-2xl glass p-6 flex items-center justify-center text-slate-200 font-semibold">WordPress</div>
+        <div class="rounded-2xl glass p-6 flex items-center justify-center text-slate-200 font-semibold">Perplexity</div>
+        <div class="rounded-2xl glass p-6 flex items-center justify-center text-slate-200 font-semibold">Google AIO</div>
       </div>
     </div>
   </section>
@@ -117,46 +110,106 @@
   <section id="product" class="py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2">Produit</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Mesurer l’invisible. Agir immédiatement.</h2>
-        <p class="mt-3 text-slate-300 mx-auto max-w-3xl">Suivez votre présence dans les réponses IA, identifiez les sources qui façonnent ces réponses et obtenez des playbooks d’action prêts à exécuter.</p>
+        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2" data-i18n="product.kicker">Produit</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight" data-i18n="product.title">Mesurer l’invisible. Agir immédiatement.</h2>
+        <p class="mt-3 text-slate-300 mx-auto max-w-3xl" data-i18n="product.subtitle">Suivez votre présence dans les réponses IA, identifiez les sources qui façonnent ces réponses et obtenez des playbooks d’action prêts à exécuter.</p>
+      </div>
+      <div id="features-cards" class="grid lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo" class="py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <h2 class="text-3xl font-extrabold text-white leading-tight" data-i18n="demo.title">Démo : comment ça marche ?</h2>
+        <p class="mt-2 text-slate-300 max-w-3xl" data-i18n="demo.subtitle">Importez vos requêtes, lancez un run, nous détectons les citations et calculons Coverage / Visibility / Citation Share. Puis on génère un playbook d’actions.</p>
       </div>
       <div class="grid lg:grid-cols-3 gap-6">
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-sm shadow-lg shadow-black/20 p-6">
-          <div class="text-slate-200 font-semibold">Monitoring multi‑surfaces</div>
-          <p class="mt-2 text-slate-300 text-sm">Perplexity + Google AI Overviews (via provider), FR/EN à minima. Détection de mentions et citations par requête/cluster.</p>
-          <div class="mt-4 space-y-2 text-slate-300 text-sm">
-            <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Présence / rang</div>
-            <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Citations & domaines</div>
-            <div class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Historique 7/30 jours</div>
+        <div class="lg:col-span-2">
+          <div class="glass rounded-2xl p-6">
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="text-sm text-slate-200"><span data-i18n="demo.form.cluster">Nom du cluster</span>
+                <input id="demo-cluster" value="Comparatifs skincare FR" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+              </label>
+              <label class="text-sm text-slate-200"><span data-i18n="demo.form.volume">Volume mensuel (requêtes)</span>
+                <input id="demo-volume" type="number" value="12000" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+              </label>
+            </div>
+            <div class="mt-3 flex items-center gap-3">
+              <button id="demo-run" class="btn btn-primary" data-i18n="demo.form.run">Lancer la démo</button>
+              <span id="demo-status" class="text-slate-400 text-sm hidden">…</span>
+            </div>
+            <div class="mt-4 grid sm:grid-cols-4 gap-2" id="demo-steps"></div>
+            <div id="demo-results" class="hidden mt-6 grid lg:grid-cols-3 gap-6">
+              <div class="glass rounded-2xl p-4">
+                <div class="text-slate-400 text-xs uppercase tracking-widest" data-i18n="demo.results.title">Résultats simulés</div>
+                <div class="mt-3 grid grid-cols-3 gap-3 text-center">
+                  <div class="glass rounded-xl p-4"><div class="text-xs text-slate-400" data-i18n="demo.results.coverage">Coverage</div><div id="kpi-coverage" class="text-2xl font-bold text-white">—</div></div>
+                  <div class="glass rounded-xl p-4"><div class="text-xs text-slate-400" data-i18n="demo.results.visibility">Visibility</div><div id="kpi-visibility" class="text-2xl font-bold text-white">—</div></div>
+                  <div class="glass rounded-xl p-4"><div class="text-xs text-slate-400" data-i18n="demo.results.cshare">Citation Share</div><div id="kpi-cshare" class="text-2xl font-bold text-white">—</div></div>
+                </div>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <div class="text-slate-400 text-xs uppercase tracking-widest" data-i18n="demo.results.sources">Top domaines cités</div>
+                <ul id="demo-sources" class="mt-3 text-sm text-slate-200 list-disc pl-5"></ul>
+              </div>
+              <div class="glass rounded-2xl p-4">
+                <div class="text-slate-400 text-xs uppercase tracking-widest" data-i18n="demo.results.gaps">Gaps (requêtes sans votre marque)</div>
+                <ul id="demo-gaps" class="mt-3 text-sm text-rose-200 list-disc pl-5"></ul>
+              </div>
+            </div>
+            <div id="demo-playbook" class="hidden glass rounded-2xl p-4 mt-6">
+              <div class="text-slate-200 font-semibold" data-i18n="demo.results.playbook">Playbook (aperçu)</div>
+              <ul id="demo-playbook-list" class="mt-2 text-slate-300 text-sm list-disc pl-5"></ul>
+            </div>
           </div>
         </div>
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-sm shadow-lg shadow-black/20 p-6">
-          <div class="text-slate-200 font-semibold">KPI d’influence utiles</div>
-          <p class="mt-2 text-slate-300 text-sm">Trois métriques simples, compréhensibles par les équipes Content/PR.</p>
-          <div class="mt-4 grid grid-cols-3 gap-3 text-center">
-            <div class="rounded-xl bg-white/5 p-4">
-              <div class="text-xs text-slate-400">Coverage</div>
-              <div class="text-xl font-bold text-white">%</div>
-            </div>
-            <div class="rounded-xl bg-white/5 p-4">
-              <div class="text-xs text-slate-400">Visibility</div>
-              <div class="text-xl font-bold text-white">0–100</div>
-            </div>
-            <div class="rounded-xl bg-white/5 p-4">
-              <div class="text-xs text-slate-400">Citation Share</div>
-              <div class="text-xl font-bold text-white">pts</div>
-            </div>
+        <div>
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400 mb-2">Self‑tests</div>
+            <ul id="tests" class="grid gap-2"></ul>
           </div>
         </div>
-        <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-sm shadow-lg shadow-black/20 p-6">
-          <div class="text-slate-200 font-semibold">Playbooks GEO/AEO 1‑clic</div>
-          <p class="mt-2 text-slate-300 text-sm">Briefs contenus + schémas <span class="font-mono text-slate-200">schema.org</span> (Product/FAQ/HowTo/Article) + shortlist médias à cibler. « Gap → Action → Impact » visible.</p>
-          <div class="mt-4 flex items-center gap-3">
-            <a href="#demo" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-600/30">Voir un playbook</a>
-            <a href="#contact" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/5 ring-1 ring-white/10">Parler au produit</a>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section id="roi" class="py-16">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <h2 class="text-3xl font-extrabold text-white leading-tight" data-i18n="roi.title">Impact e‑commerce & dropshipping (ROI)</h2>
+        <p class="mt-2 text-slate-300 max-w-3xl" data-i18n="roi.subtitle">Estimez l’impact d’un gain de Citation Share sur vos revenus en surfaces d’answers IA.</p>
+      </div>
+      <div class="glass rounded-2xl p-6">
+        <div class="grid sm:grid-cols-3 gap-3">
+          <label class="text-sm text-slate-200"><span data-i18n="roi.inputs.volume">Volume mensuel (cluster)</span>
+            <input id="roi-volume" type="number" value="50000" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+          </label>
+          <label class="text-sm text-slate-200"><span data-i18n="roi.inputs.aeo">% trafic influencé par les réponses IA</span>
+            <input id="roi-aeo" type="number" value="25" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+          </label>
+          <label class="text-sm text-slate-200"><span data-i18n="roi.inputs.base">Citation Share actuel (%)</span>
+            <input id="roi-base" type="number" value="8" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+          </label>
+          <label class="text-sm text-slate-200"><span data-i18n="roi.inputs.cr">Taux de conversion (%)</span>
+            <input id="roi-cr" type="number" value="2.0" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+          </label>
+          <label class="text-sm text-slate-200"><span data-i18n="roi.inputs.aov">Panier moyen (€)</span>
+            <input id="roi-aov" type="number" value="60" class="mt-1 w-full rounded-lg px-3 py-2 bg-white/5 text-slate-100" />
+          </label>
         </div>
+        <div class="mt-3"><button id="roi-calc" class="btn btn-primary" data-i18n="roi.inputs.calc">Calculer</button></div>
+        <div class="mt-4 overflow-x-auto">
+          <table class="table w-full text-sm">
+            <thead>
+              <tr class="text-slate-400" id="roi-head"></tr>
+            </thead>
+            <tbody id="roi-body" class="text-slate-200"></tbody>
+          </table>
+        </div>
+        <div class="text-xs text-slate-400 mt-3" id="roi-note"></div>
       </div>
     </div>
   </section>
@@ -166,26 +219,10 @@
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2">Why Now</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Les réponses IA redéfinissent la découverte</h2>
-        <p class="mt-3 text-slate-300 mx-auto max-w-3xl">Les marques doivent mesurer et influencer leur présence dans les answer engines. Notre approche EU‑first et multilingue apporte un avantage concurrentiel immédiat en Europe.</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight" data-i18n="whynow.title">Les réponses IA redéfinissent la découverte</h2>
+        <p class="mt-3 text-slate-300 mx-auto max-w-3xl" data-i18n="whynow.subtitle">Les marques doivent mesurer et influencer leur présence dans les answer engines. Notre approche EU‑first et multilingue apporte un avantage concurrentiel immédiat en Europe.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-3xl font-extrabold text-white">+95%</div>
-          <div class="mt-2 text-slate-200 font-semibold">des orga. utilisent des apps IA</div>
-          <div class="mt-2 text-slate-300 text-sm">Adoption massive des outils IA côté marketing et search.</div>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-3xl font-extrabold text-white">AEO</div>
-          <div class="mt-2 text-slate-200 font-semibold">AI Overviews</div>
-          <div class="mt-2 text-slate-300 text-sm">Google introduit des réponses IA synthétiques influencées par des citations.</div>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-3xl font-extrabold text-white">EU</div>
-          <div class="mt-2 text-slate-200 font-semibold">Privacy & langues</div>
-          <div class="mt-2 text-slate-300 text-sm">Peu d’outils couvrent FR/ES/DE avec hébergement UE.</div>
-        </div>
-      </div>
+      <div id="why-cards" class="grid md:grid-cols-3 gap-6"></div>
     </div>
   </section>
 
@@ -193,31 +230,31 @@
   <section id="moat" class="py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2">Différenciation</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Ce qui nous rend défendables</h2>
-        <p class="mt-3 text-slate-300 mx-auto max-w-3xl">Nous ne sommes pas un simple « tracker de mentions ». Nous fermons la boucle jusqu’à l’impact business.</p>
+        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2" data-i18n="moat.kicker">Différenciation</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight" data-i18n="moat.title">Ce qui nous rend défendables</h2>
+        <p class="mt-3 text-slate-300 mx-auto max-w-3xl" data-i18n="moat.subtitle">Nous ne sommes pas un simple « tracker de mentions ». Nous fermons la boucle jusqu’à l’impact business.</p>
       </div>
       <div class="grid lg:grid-cols-2 gap-6">
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+        <div class="rounded-2xl glass p-6">
           <div class="flex items-center gap-2">
-            <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30">EU‑first</span>
-            <span class="text-slate-200 font-semibold">Hébergement UE & privacy by design</span>
+            <span class="pill bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30">EU‑first</span>
+            <span class="text-slate-200 font-semibold" data-i18n="moat.point1">Hébergement UE & privacy by design</span>
           </div>
-          <p class="mt-2 text-slate-300 text-sm">Conforme, rassurant pour les marques/agences européennes.</p>
-          <div class="mt-4 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Multilingue (FR/ES/DE) — par défaut</div>
-          <div class="mt-1 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> KPI « Citation Share » expliqué & traçable</div>
-          <div class="mt-1 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Chrome Helper (preuve live sur requête)</div>
+          <p class="mt-2 text-slate-300 text-sm" data-i18n="moat.point1desc">Conforme, rassurant pour les marques/agences européennes.</p>
+          <div class="mt-4 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> <span data-i18n="moat.point2">Multilingue (FR/ES/DE) — par défaut</span></div>
+          <div class="mt-1 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> <span data-i18n="moat.point3">KPI « Citation Share » expliqué & traçable</span></div>
+          <div class="mt-1 flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> <span data-i18n="moat.point4">Chrome Helper (preuve live sur requête)</span></div>
         </div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+        <div class="rounded-2xl glass p-6">
           <div class="flex items-center gap-2">
-            <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30">Gap → Action → Impact</span>
-            <span class="text-slate-200 font-semibold">Playbooks 1‑clic</span>
+            <span class="pill bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/30">Gap → Action → Impact</span>
+            <span class="text-slate-200 font-semibold" data-i18n="moat.point5">Playbooks 1‑clic</span>
           </div>
-          <p class="mt-2 text-slate-300 text-sm">Briefs contenus + schémas + cibles PR, puis suivi de l’impact sur 30 jours.</p>
+          <p class="mt-2 text-slate-300 text-sm" data-i18n="moat.point5desc">Briefs contenus + schémas + cibles PR, puis suivi de l’impact sur 30 jours.</p>
           <div class="mt-4 grid grid-cols-3 gap-3 text-center">
-            <div class="rounded-xl bg-white/5 p-4"><div class="text-xs text-slate-400">Étape 1</div><div class="text-lg font-bold text-white">Gap</div></div>
-            <div class="rounded-xl bg-white/5 p-4"><div class="text-xs text-slate-400">Étape 2</div><div class="text-lg font-bold text-white">Action</div></div>
-            <div class="rounded-xl bg-white/5 p-4"><div class="text-xs text-slate-400">Étape 3</div><div class="text-lg font-bold text-white">Impact</div></div>
+            <div class="rounded-xl glass p-4"><div class="text-xs text-slate-400" data-i18n="moat.step1">Étape 1</div><div class="text-lg font-bold text-white" data-i18n="moat.step1t">Gap</div></div>
+            <div class="rounded-xl glass p-4"><div class="text-xs text-slate-400" data-i18n="moat.step2">Étape 2</div><div class="text-lg font-bold text-white" data-i18n="moat.step2t">Action</div></div>
+            <div class="rounded-xl glass p-4"><div class="text-xs text-slate-400" data-i18n="moat.step3">Étape 3</div><div class="text-lg font-bold text-white" data-i18n="moat.step3t">Impact</div></div>
           </div>
         </div>
       </div>
@@ -228,16 +265,12 @@
   <section id="traction" class="py-16">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2">Traction (pilotes)</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Ce que nous mesurons en bêta</h2>
-        <p class="mt-3 text-slate-300 mx-auto max-w-3xl">Indicateurs à renseigner avant levée : comptes pilotes, amélioration de Citation Share, réduction de gaps critiques.</p>
+        <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2" data-i18n="traction.kicker">Traction (pilotes)</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight" data-i18n="traction.title">Ce que nous mesurons en bêta</h2>
+        <p class="mt-3 text-slate-300 mx-auto max-w-3xl" data-i18n="traction.subtitle">Indicateurs à renseigner avant levée : comptes pilotes, amélioration de Citation Share, réduction de gaps critiques.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"><div class="text-slate-200 font-semibold">Comptes bêta</div><div class="mt-2 text-slate-300 text-sm">5–10 agences FR/ES/DE</div></div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"><div class="text-slate-200 font-semibold">+Citation Share</div><div class="mt-2 text-slate-300 text-sm">+10 à +20 pts / 6–8 semaines</div></div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"><div class="text-slate-200 font-semibold">Gaps critiques</div><div class="mt-2 text-slate-300 text-sm">−30% / 30 jours sur 1–2 clusters</div></div>
-      </div>
-      <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 mt-6">
+      <div id="traction-cards" class="grid md:grid-cols-3 gap-6"></div>
+      <div class="rounded-2xl glass p-6 mt-6">
         <div class="text-slate-200 font-semibold">Études de cas (placeholders)</div>
         <p class="mt-2 text-slate-300 text-sm">Remplacer par 2–3 vignettes client : avant → après (Coverage / Citation Share / revenus attribués).</p>
       </div>
@@ -249,57 +282,271 @@
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
         <div class="text-xs tracking-widest uppercase text-sky-400 font-semibold mb-2">Business</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Modèle économique & feuille de route</h2>
-        <p class="mt-3 text-slate-300 mx-auto max-w-3xl">SaaS pur avec coûts variables maîtrisés (APIs & compute). Roadmap pour atteindre la parité « lite » avec les leaders US en 3–6 mois.</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight" data-i18n="model.title">Modèle économique & feuille de route</h2>
+        <p class="mt-3 text-slate-300 mx-auto max-w-3xl" data-i18n="model.subtitle">SaaS pur avec coûts variables maîtrisés (APIs & compute). Roadmap pour atteindre la parité « lite » avec les leaders US en 3–6 mois.</p>
       </div>
-      <div class="grid lg:grid-cols-3 gap-6">
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-slate-200 font-semibold">Plans (indicatifs)</div>
-          <ul class="mt-2 space-y-2 text-slate-300 text-sm">
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Starter 129€/mois</li>
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Growth 349€/mois</li>
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Agency 899€+</li>
-          </ul>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-slate-200 font-semibold">Roadmap 0–6 mois</div>
-          <ul class="mt-2 space-y-2 text-slate-300 text-sm">
-            <li>0–2M : MVP (Perplexity + AIO, FR/EN, Gaps/Citations, playbooks v1)</li>
-            <li>2–3M : Chrome Helper, rapports, quotas & sampling</li>
-            <li>3–4M : 3e surface IA, bench multi‑marques, facturation</li>
-            <li>4–6M : intégrations WP/Shopify 1‑clic, enrichissement playbooks</li>
-          </ul>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <div class="text-slate-200 font-semibold">Risques & parades</div>
-          <ul class="mt-2 space-y-2 text-slate-300 text-sm">
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Formats AIO changeants → provider SERP</li>
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Coûts API → batch nocturnes + cache + sampling</li>
-            <li class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-5 w-5 text-emerald-400"><path fill="currentColor" d="M8.293 13.293 4.5 9.5l1.414-1.414L8.293 10.46l5.793-5.793L15.5 6.08z"/></svg> Faux positifs → domain‑first + alias + fuzzy</li>
-          </ul>
-        </div>
-      </div>
+      <div id="pricing-cards" class="grid lg:grid-cols-3 gap-6"></div>
     </div>
   </section>
 
   <!-- CTA -->
   <section id="contact" class="py-20">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-2xl bg-white/5 p-8 ring-1 ring-white/10 text-center">
+      <div class="rounded-2xl glass p-8 text-center">
         <div class="flex flex-col items-center gap-4">
-          <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30">Pré‑seed / seed exploratoire</span>
-          <h3 class="text-2xl md:text-3xl font-extrabold text-white">Investisseurs : voyons une démo et le pipeline bêta</h3>
-          <p class="max-w-2xl text-slate-300">Nous ciblons 3–5 logos agences FR/ES/DE et 2 marques D2C pour une bêta de 8 semaines. Demandez le deck et la data‑room (metrics & unit economics).</p>
+          <span class="pill bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30" data-i18n="cta.stage">Pré‑seed / seed exploratoire</span>
+          <h3 class="text-2xl md:text-3xl font-extrabold text-white" data-i18n="cta.head">Investisseurs : voyons une démo et le pipeline bêta</h3>
+          <p class="max-w-2xl text-slate-300" data-i18n="cta.copy">Nous ciblons 3–5 logos agences FR/ES/DE et 2 marques D2C pour une bêta de 8 semaines. Demandez le deck et la data‑room (metrics & unit economics).</p>
           <div class="flex flex-wrap gap-3">
-            <a href="#demo" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold bg-sky-500 text-white hover:bg-sky-400 shadow-lg shadow-sky-600/30">Demander une démo</a>
-            <a href="mailto:founders@llm-visibility.ai" class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-slate-200 hover:text-white hover:bg-white/5 ring-1 ring-white/10">founders@llm-visibility.ai</a>
+            <a href="#demo" class="btn btn-primary" data-i18n="cta.primary">Demander une démo</a>
+            <a href="mailto:founders@llm-visibility.ai" class="btn btn-ghost">founders@llm-visibility.ai</a>
           </div>
         </div>
       </div>
-      <div class="mt-6 text-center text-xs text-slate-500">© <span id="year"></span> LLM Visibility & Citations Copilot — Hébergement UE • Privacy by design</div>
+      <div class="mt-6 text-center text-xs text-slate-500">© <span id="year"></span> <span data-i18n="brand">LLM Visibility & Citations Copilot</span> — <span data-i18n="footer.privacy">Hébergement UE • Privacy by design</span></div>
     </div>
   </section>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    // --- I18N ---
+    const I18N = {
+      fr: {
+        brand: "Visibility & Citations Copilot",
+        nav: { product: "Produit", whynow: "Why Now", moat: "Différenciation", traction: "Traction", model: "Business", contact: "Contact", demo: "Démo", roi: "ROI" },
+        badges: { eu: "EU‑first • Privacy by design", langs: "FR / ES / DE" },
+        hero: { title: "Gagnez votre visibilité dans les réponses IA", subtitle: "Nous révélons où et pourquoi les IA vous ignorent (Perplexity, Google AI Overviews…) et transformons ces « gaps » en actions SEO/PR prêtes à exécuter.", point1: "Multilingue (FR/ES/DE)", point2: "KPI : Coverage • Visibility • Citation Share", example: "Exemple — Cluster « Comparatifs Skincare » (FR)", },
+        cta: { talk: "Parler aux fondateurs", demo: "Voir la démo", deck: "Deck investisseurs", stage: "Pré‑seed / seed exploratoire", head: "Investisseurs : voyons une démo et le pipeline bêta", copy: "Nous ciblons 3–5 logos agences FR/ES/DE et 2 marques D2C pour une bêta de 8 semaines. Demandez le deck et la data‑room (metrics & unit economics).", primary: "Demander une démo" },
+        social: { subtitle: "Fait pour agences SEO/Content & marques e‑commerce" },
+        product: { kicker: "Produit", title: "Mesurer l’invisible. Agir immédiatement.", subtitle: "Suivez votre présence dans les réponses IA, identifiez les sources qui façonnent ces réponses et obtenez des playbooks d’action prêts à exécuter." },
+        features: [
+          { t: "Monitoring multi‑surfaces", d: "Perplexity + Google AI Overviews (via provider), détection de mentions & citations par requête/cluster." },
+          { t: "KPI d’influence utiles", d: "Coverage, Visibility (rang), Citation Share — lisibles par les équipes Content/PR." },
+          { t: "Playbooks GEO/AEO 1‑clic", d: "Briefs contenus + schema.org + shortlist médias. Suivi ‘Gap → Action → Impact’." }
+        ],
+        whynow: { title: "Les réponses IA redéfinissent la découverte", subtitle: "Les marques doivent mesurer et influencer leur présence dans les answer engines. Notre approche EU‑first et multilingue apporte un avantage concurrentiel immédiat en Europe.", cards: [
+          { k: "+95%", t: "des orga. utilisent des apps IA", d: "Adoption massive des outils IA côté marketing et search." },
+          { k: "AEO", t: "AI Overviews", d: "Google introduit des réponses IA synthétiques influencées par des citations." },
+          { k: "EU", t: "Privacy & langues", d: "Peu d’outils couvrent FR/ES/DE avec hébergement UE." } ] },
+        moat: { kicker: "Différenciation", title: "Ce qui nous rend défendables", subtitle: "Nous ne sommes pas un simple « tracker de mentions ». Nous fermons la boucle jusqu’à l’impact business.", point1: "Hébergement UE & privacy by design", point1desc: "Conforme, rassurant pour les marques/agences européennes.", point2: "Multilingue (FR/ES/DE) — par défaut", point3: "KPI « Citation Share » expliqué & traçable", point4: "Chrome Helper (preuve live sur requête)", point5: "Playbooks 1‑clic", point5desc: "Briefs contenus + schémas + cibles PR, puis suivi de l’impact sur 30 jours.", step1: "Étape 1", step1t: "Gap", step2: "Étape 2", step2t: "Action", step3: "Étape 3", step3t: "Impact" },
+        traction: { kicker: "Traction (pilotes)", title: "Ce que nous mesurons en bêta", subtitle: "Indicateurs à renseigner avant levée : comptes pilotes, amélioration de Citation Share, réduction de gaps critiques.", cards: [
+          { h: "Comptes bêta", p: "5–10 agences FR/ES/DE" }, { h: "+Citation Share", p: "+10 à +20 pts / 6–8 semaines" }, { h: "Gaps critiques", p: "−30% / 30 jours sur 1–2 clusters" } ] },
+        model: { title: "Modèle économique & feuille de route", subtitle: "SaaS pur avec coûts variables maîtrisés (APIs & compute). Roadmap pour atteindre la parité « lite » avec les leaders US en 3–6 mois.", pricing: [
+          { name: "Starter", price: "129€", per: "/mois", desc: "1 marque • 300 requêtes • 1 surface (Perplexity) • FR/EN", cta: "Démarrer l’essai" },
+          { name: "Growth", price: "349€", per: "/mois", desc: "5 marques • 1500 requêtes • 2–3 surfaces • FR/ES/DE • rapports", cta: "Parler aux ventes" },
+          { name: "Agency", price: "899€+", per: "/mois", desc: "Volumes, multi‑workspaces, SSO, exports bruts, playbooks custom", cta: "Nous contacter" } ] },
+        footer: { privacy: "Hébergement UE • Privacy by design" },
+        demo: { title: "Démo : comment ça marche ?", subtitle: "Importez vos requêtes, lancez un run, nous détectons les citations et calculons Coverage / Visibility / Citation Share. Puis on génère un playbook.", form: { cluster: "Nom du cluster", volume: "Volume mensuel (requêtes)", run: "Lancer la démo" }, steps: ["Collecte réponses IA","Parsing & citations","Calcul des KPIs","Playbook généré"], results: { title: "Résultats simulés", coverage: "Coverage", visibility: "Visibility", cshare: "Citation Share", sources: "Top domaines cités", gaps: "Gaps (requêtes sans votre marque)", playbook: "Playbook (aperçu)" }, playbook: ["Ajouter schema.org Product/FAQ sur 2 pages clés","Créer un comparatif ‘X vs Y’ en FR/EN","Pitch PR vers 3 domaines cités hautement"] },
+        roi: { title: "Impact e‑commerce & dropshipping (ROI)", subtitle: "Estimez l’impact d’un gain de Citation Share sur vos revenus en surfaces d’answers IA.", inputs: { volume: "Volume mensuel (cluster)", aeo: "% trafic influencé par les réponses IA", base: "Citation Share actuel (%)", uplift: "+pts Citation Share", cr: "Taux de conversion (%)", aov: "Panier moyen (€)", calc: "Calculer" }, tableHead: ["Scénario","Clics incr.","Cmds incr.","CA incr."], scenarios: ["Conservateur (+5pts)","Central (+10pts)","Haut (+15pts)"] }
+      },
+      en: {
+        brand: "Visibility & Citations Copilot",
+        nav: { product: "Product", whynow: "Why Now", moat: "Differentiation", traction: "Traction", model: "Business", contact: "Contact", demo: "Demo", roi: "ROI" },
+        badges: { eu: "EU‑first • Privacy by design", langs: "FR / ES / DE" },
+        hero: { title: "Win your visibility inside AI answers", subtitle: "We reveal where and why AI overlooks your brand (Perplexity, Google AI Overviews…) and turn those gaps into ready‑to‑ship SEO/PR actions.", point1: "Multilingual (FR/ES/DE)", point2: "KPIs: Coverage • Visibility • Citation Share", example: "Example — ‘Skincare Comparisons’ cluster (FR)" },
+        cta: { talk: "Talk to Founders", demo: "Watch the demo", deck: "Investor deck", stage: "Pre‑seed / exploratory seed", head: "Investors: let’s review a demo and the beta pipeline", copy: "We’re targeting 3–5 agency logos in FR/ES/DE and 2 D2C brands for an 8‑week beta. Ask for the deck & data‑room (metrics & unit economics).", primary: "Request a demo" },
+        social: { subtitle: "Built for SEO/Content agencies & e‑commerce brands" },
+        product: { kicker: "Product", title: "Measure the invisible. Act immediately.", subtitle: "Track your presence in AI answers, map the sources AIs cite and get one‑click playbooks to win citations." },
+        features: [
+          { t: "Multi‑surface monitoring", d: "Perplexity + Google AI Overviews (via provider). Mentions & citations by query/cluster." },
+          { t: "Useful influence KPIs", d: "Coverage, Visibility (rank), Citation Share — readable for Content/PR teams." },
+          { t: "One‑click GEO/AEO playbooks", d: "Content briefs + schema.org + media shortlist. Track ‘Gap → Action → Impact’." }
+        ],
+        whynow: { title: "AI answers are redefining discovery", subtitle: "Brands must measure and influence their presence in answer engines. Our EU‑first, multilingual approach gives an immediate edge in Europe.", cards: [
+          { k: "+95%", t: "orgs use AI apps", d: "Mass adoption of AI tools in marketing & search." },
+          { k: "AEO", t: "AI Overviews", d: "Google ships AI summaries influenced by citations." },
+          { k: "EU", t: "Privacy & languages", d: "Few tools truly cover FR/ES/DE with EU hosting." } ] },
+        moat: { kicker: "Differentiation", title: "What makes us defensible", subtitle: "Not just a ‘mentions tracker’. We close the loop all the way to business impact.", point1: "EU hosting & privacy by design", point1desc: "Compliant and reassuring for EU brands/agencies.", point2: "Multilingual (FR/ES/DE) by default", point3: "‘Citation Share’ KPI that’s explainable & traceable", point4: "Chrome Helper (live proof on a query)", point5: "One‑click playbooks", point5desc: "Content briefs + schema + PR targets; then 30‑day impact tracking.", step1: "Step 1", step1t: "Gap", step2: "Step 2", step2t: "Action", step3: "Step 3", step3t: "Impact" },
+        traction: { kicker: "Traction (pilots)", title: "What we measure in beta", subtitle: "Investor‑ready indicators: pilot accounts, Citation Share lift, reduction of critical gaps.", cards: [
+          { h: "Pilot accounts", p: "5–10 agencies in FR/ES/DE" }, { h: "+Citation Share", p: "+10 to +20 pts / 6–8 weeks" }, { h: "Critical gaps", p: "−30% / 30 days across 1–2 clusters" } ] },
+        model: { title: "Business model & roadmap", subtitle: "Pure SaaS with controlled variable costs (APIs & compute). Roadmap to a ‘lite’ parity with US leaders in 3–6 months.", pricing: [
+          { name: "Starter", price: "€129", per: "/mo", desc: "1 brand • 300 queries • 1 surface (Perplexity) • FR/EN", cta: "Start free trial" },
+          { name: "Growth", price: "€349", per: "/mo", desc: "5 brands • 1500 queries • 2–3 surfaces • FR/ES/DE • reports", cta: "Talk to sales" },
+          { name: "Agency", price: "€899+", per: "/mo", desc: "Volumes, multi‑workspaces, SSO, raw exports, custom playbooks", cta: "Contact us" } ] },
+        footer: { privacy: "EU hosting • Privacy by design" },
+        demo: { title: "Demo: how it works", subtitle: "Import your queries, run once, we extract citations and compute Coverage / Visibility / Citation Share. Then we generate a playbook.", form: { cluster: "Cluster name", volume: "Monthly volume (queries)", run: "Run demo" }, steps: ["Collect AI answers","Parse & citations","Compute KPIs","Playbook generated"], results: { title: "Simulated results", coverage: "Coverage", visibility: "Visibility", cshare: "Citation Share", sources: "Top cited domains", gaps: "Gaps (queries missing your brand)", playbook: "Playbook (preview)" }, playbook: ["Add schema.org Product/FAQ on 2 key pages","Publish a ‘X vs Y’ comparison in FR/EN","Pitch PR to 3 highly cited domains"] },
+        roi: { title: "E‑commerce & dropshipping impact (ROI)", subtitle: "Estimate the revenue impact from Citation Share lift across AI answer surfaces.", inputs: { volume: "Monthly volume (cluster)", aeo: "% traffic influenced by AI answers", base: "Current Citation Share (%)", uplift: "+pts Citation Share", cr: "Conversion rate (%)", aov: "Average order value (€)", calc: "Calculate" }, tableHead: ["Scenario","Extra clicks","Extra orders","Extra revenue"], scenarios: ["Conservative (+5pts)","Base (+10pts)","High (+15pts)"] }
+      }
+    };
+
+    // --- Helpers ---
+    function $(sel){ return document.querySelector(sel); }
+    function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
+    function seeded(name) { let h = 0; for (let i=0;i<name.length;i++) h = Math.imul(31, h) + name.charCodeAt(i) | 0; return () => { h ^= h << 13; h ^= h >> 17; h ^= h << 5; return (h>>>0) / 4294967296; }; }
+
+    function fillCards(containerId, items) {
+      const root = document.getElementById(containerId);
+      if (!root) return;
+      root.innerHTML = items.map(it => `
+        <div class="rounded-2xl glass p-6">
+          ${it.k ? `<div class="text-3xl font-extrabold text-white">${it.k}</div>` : ''}
+          ${it.name ? `<div class="text-slate-400 text-xs uppercase tracking-widest">${it.name}</div>` : ''}
+          ${it.price ? `<div class="mt-2 text-3xl font-extrabold text-white">${it.price}<span class="text-base font-semibold text-slate-400">${it.per||''}</span></div>` : ''}
+          ${it.t ? `<div class="mt-2 text-slate-200 font-semibold">${it.t}</div>` : ''}
+          ${it.h ? `<div class="text-slate-200 font-semibold">${it.h}</div>` : ''}
+          ${it.d ? `<div class="mt-2 text-slate-300 text-sm">${it.d}</div>` : ''}
+          ${it.p ? `<div class="mt-2 text-slate-300 text-sm">${it.p}</div>` : ''}
+          ${it.desc ? `<p class="mt-3 text-slate-300 text-sm">${it.desc}</p>` : ''}
+          ${it.cta ? `<div class="mt-4"><a href="#contact" class="btn btn-primary">${it.cta}</a></div>` : ''}
+        </div>`).join('');
+    }
+
+    function translateStatic(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const parts = key.split('.');
+        let node = I18N[lang];
+        for (const p of parts) { node = node?.[p]; }
+        if (typeof node === 'string') el.innerHTML = node;
+      });
+      const meta = document.getElementById('meta-desc');
+      meta.setAttribute('content', I18N[lang].hero.subtitle);
+    }
+
+    function setToggle(lang){
+      $('#btn-fr').classList.toggle('toggle-active', lang==='fr');
+      $('#btn-en').classList.toggle('toggle-active', lang==='en');
+    }
+
+    function renderDynamic(lang){
+      fillCards('features-cards', I18N[lang].features);
+      fillCards('why-cards', I18N[lang].whynow.cards);
+      fillCards('traction-cards', I18N[lang].traction.cards);
+      fillCards('pricing-cards', I18N[lang].model.pricing);
+      // ROI table head & footnote
+      const head = I18N[lang].roi.tableHead.map(h=>`<th class="text-left pb-2 pr-4">${h}</th>`).join('');
+      $('#roi-head').innerHTML = head;
+      $('#roi-note').textContent = lang==='fr' ? "Hypothèses : l’uplift de Citation Share est utilisé comme proxy d’uplift de part de trafic sur les surfaces IA. À ajuster selon vos données." : "Assumptions: Citation Share uplift used as proxy for traffic share uplift on AI surfaces. Adjust to your data.";
+    }
+
+    function setLang(lang) {
+      localStorage.setItem('site-lang', lang);
+      document.documentElement.lang = lang;
+      translateStatic(lang);
+      renderDynamic(lang);
+      setToggle(lang);
+    }
+
+    // --- Hero bars ---
+    function renderBars(){
+      const grid = document.getElementById('bars');
+      if (!grid || grid.children.length) return;
+      for (let i=0;i<12;i++){
+        const wrap = document.createElement('div');
+        wrap.className = 'h-24 rounded-md ring-1 ring-white/5 flex items-end';
+        wrap.style.background = 'linear-gradient(0deg, rgba(56,189,248,0.15), rgba(56,189,248,0.05))';
+        const inner = document.createElement('div');
+        inner.className = 'w-full rounded-b-md';
+        inner.style.background = 'rgba(56,189,248,0.6)';
+        inner.style.height = (20 + (i%5)*12) + 'px';
+        wrap.appendChild(inner);
+        grid.appendChild(wrap);
+      }
+    }
+
+    // --- Demo logic ---
+    function runDemo(lang){
+      const t = I18N[lang].demo;
+      const cluster = $('#demo-cluster').value;
+      const volume = parseInt($('#demo-volume').value||'0',10);
+      const rnd = seeded(cluster);
+      const steps = t.steps;
+      const stepsRoot = $('#demo-steps');
+      stepsRoot.innerHTML = steps.map((s,i)=>`<div class="badge-step wait">${i+1}. ${s}</div>`).join('');
+      const status = $('#demo-status');
+      status.classList.remove('hidden'); status.textContent = lang==='fr'?'Exécution en cours…':'Running…';
+
+      let i = 0;
+      function next(){
+        if (i>0) stepsRoot.children[i-1].classList.replace('wait','ok');
+        if (i === steps.length){
+          // produce results
+          const coverage = Math.round(55 + rnd()*35);
+          const visibility = Math.round(45 + rnd()*40);
+          const cshare = Math.round(8 + rnd()*20);
+          $('#kpi-coverage').textContent = coverage + '%';
+          $('#kpi-visibility').textContent = String(visibility);
+          $('#kpi-cshare').textContent = cshare + '%';
+          const domains = ["example.com","beautyinsider.fr","dermadoctor.eu","topsante.fr","skincarelab.io","comparatifs.fr","beaute-mag.com"]; 
+          domains.sort(()=>rnd()-0.5);
+          $('#demo-sources').innerHTML = domains.slice(0,5).map(d=>`<li>${d}</li>`).join('');
+          const gaps = ["meilleure creme peau sèche","meilleur hydratant 2025","face moisturizer best brand","comparatif serum vitamine C"]; gaps.sort(()=>rnd()-0.5);
+          $('#demo-gaps').innerHTML = gaps.slice(0,3).map(g=>`<li>${g}</li>`).join('');
+          // playbook
+          const pl = I18N[lang].demo.playbook;
+          $('#demo-playbook-list').innerHTML = pl.map(x=>`<li>${x}</li>`).join('');
+          $('#demo-results').classList.remove('hidden');
+          $('#demo-playbook').classList.remove('hidden');
+          status.classList.add('hidden');
+          return;
+        }
+        i++; setTimeout(next, 550);
+      }
+      next();
+    }
+
+    // --- ROI logic ---
+    function computeROI(lang){
+      const t = I18N[lang].roi;
+      const volume = parseInt($('#roi-volume').value||'0',10);
+      const aeo = parseFloat($('#roi-aeo').value||'0');
+      const cr = parseFloat($('#roi-cr').value||'0');
+      const aov = parseFloat($('#roi-aov').value||'0');
+      const head = t.tableHead.map(h=>`<th class="text-left pb-2 pr-4">${h}</th>`).join('');
+      $('#roi-head').innerHTML = head;
+      const scenarios = [5,10,15];
+      const rows = scenarios.map((pts, idx) => {
+        const uplift = pts/100;
+        const clicks = volume * (aeo/100) * uplift;
+        const orders = clicks * (cr/100);
+        const revenue = orders * aov;
+        return `<tr><td class="py-2 pr-4">${t.scenarios[idx]}</td><td class="py-2 pr-4">${Math.round(clicks).toLocaleString()}</td><td class="py-2 pr-4">${Math.round(orders).toLocaleString()}</td><td class="py-2 pr-4">€${Math.round(revenue).toLocaleString()}</td></tr>`;
+      }).join('');
+      $('#roi-body').innerHTML = rows;
+    }
+
+    // --- Tests ---
+    function runTests(lang){
+      const d = I18N[lang];
+      const tests = [
+        { name: 'Has hero.title', pass: !!d.hero.title },
+        { name: 'Has 3 features', pass: Array.isArray(d.features) && d.features.length >= 3 },
+        { name: 'Has 3 whynow cards', pass: Array.isArray(d.whynow.cards) && d.whynow.cards.length >= 3 },
+        { name: 'Has 3 pricing plans', pass: Array.isArray(d.model.pricing) && d.model.pricing.length >= 3 },
+        { name: 'Has demo texts', pass: !!d.demo?.title && Array.isArray(d.demo.steps) && d.demo.steps.length === 4 },
+        { name: 'ROI math sane', pass: (50000*(25/100)*(5/100)) > 0 }
+      ];
+      const root = $('#tests');
+      root.innerHTML = tests.map(t=>`<li class="rounded-lg px-3 py-2 text-sm ${t.pass ? 'bg-emerald-500/15 text-emerald-200' : 'bg-rose-500/15 text-rose-200'}">${t.pass?'✔':'✖'} ${t.name}</li>`).join('');
+    }
+
+    // --- Language toggle ---
+    function bindLang(){
+      $('#btn-fr').addEventListener('click', ()=> setLang('fr'));
+      $('#btn-en').addEventListener('click', ()=> setLang('en'));
+    }
+
+    function init(){
+      // hero bars
+      renderBars();
+      // year
+      $('#year').textContent = new Date().getFullYear();
+      // initial lang
+      const initial = (new URLSearchParams(location.search).get('lang') || localStorage.getItem('site-lang') || 'fr').toLowerCase();
+      const lang = initial === 'en' ? 'en' : 'fr';
+      setLang(lang);
+      bindLang();
+      // fill dynamic blocks (once more to ensure)
+      renderDynamic(lang);
+      // bind demo
+      $('#demo-run').addEventListener('click', ()=> runDemo(lang));
+      // bind ROI
+      $('#roi-calc').addEventListener('click', ()=> computeROI(lang));
+      computeROI(lang);
+      // tests
+      runTests(lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
 </html>
